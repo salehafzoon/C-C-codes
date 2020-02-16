@@ -14,13 +14,21 @@ void print_input(int argc , char **argv){
     return;
 }
 
-// int* sequential_adder(int a[], int b[],int size){
-//     int c[size] ={};
-//     for (int i=0;i<size;i++){
-//         c[i] = a[i]+b[i];
-//     }
-//     return c;
-// }
+int ** init_matrix(int size,int const_val){
+
+    int ** matrix;
+    matrix = (int **) malloc(size * sizeof(int));
+    for (int i =0;i<size;i++){
+        matrix[i] = (int *) malloc(size * sizeof(int));
+    }
+    for (int i =0;i<size;i++){
+        for (int j = 0; j < size; j++)
+        {
+            matrix[i][j] = const_val;
+        }
+    }
+    return matrix;
+}
 
 double get_average_sequential(int** matrix , int size){
     int sum;
@@ -52,22 +60,15 @@ int main(int argc , char **argv){
     // printf(argv[1]);
     printf("%d",size);
 
-    int ** matrix;
-    matrix = (int**) malloc(size * sizeof(int));
-    
-    for (int i = 0; i < size; i++)
-    {
-        matrix[i] = (int*) malloc(size * sizeof(int));
-        *matrix[i] = (int)1;
-    }
-    
-    for (int i = 0; i < size; i++)
-    {
+    int ** matrix_a = init_matrix(size,10);
+    int ** matrix_b = init_matrix(size,20);
+
+    int sum = 0;
+     for (int i =0;i<size;i++){
         for (int j = 0; j < size; j++)
-        {
-            printf("%d\t",matrix[i][j]);
-        }
+            sum += matrix_a[i][j];
     }
+    printf("%d",sum);
     
     return 0;
 }
